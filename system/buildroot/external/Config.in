@@ -1,3 +1,0 @@
-menu "PhoneOS packages"
-    source "$BR2_EXTERNAL_PHONEOS_PATH/package/phoneos/Config.in"
-endmenu

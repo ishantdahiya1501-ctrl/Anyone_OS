@@ -1,6 +1,0 @@
-config BR2_PACKAGE_PHONEOS
-    bool "phoneos launcher"
-    select BR2_PACKAGE_LVGL
-    select BR2_PACKAGE_LV_DRIVERS
-    help
-      Lightweight smartphone shell and app framework using LVGL.
