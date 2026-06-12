@@ -1,0 +1,43 @@
+set(PHONEOS_LAUNCHER_SOURCES
+    src/main.c
+    src/launcher.c
+    src/status_bar.c
+    src/home_screen.c
+)
+
+if(PHONEOS_WSL)
+    list(APPEND PHONEOS_LAUNCHER_SOURCES
+        src/platform_wsl.c
+    )
+else()
+    list(APPEND PHONEOS_LAUNCHER_SOURCES
+        src/platform_fbdev.c
+    )
+endif()
+
+add_executable(phoneos-launcher ${PHONEOS_LAUNCHER_SOURCES})
+
+target_include_directories(phoneos-launcher
+    PRIVATE
+        ${PROJECT_SOURCE_DIR}/system/framework/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${PROJECT_SOURCE_DIR}/config
+)
+
+target_link_libraries(phoneos-launcher
+    PRIVATE
+        phoneos_framework
+        phoneos_services
+        phoneos_apps
+        m
+)
+
+if(PHONEOS_WSL)
+    find_package(SDL2 REQUIRED)
+    target_include_directories(phoneos-launcher PRIVATE ${SDL2_INCLUDE_DIRS})
+    target_link_libraries(phoneos-launcher PRIVATE SDL2::SDL2)
+else()
+    target_link_libraries(phoneos-launcher PRIVATE ${PHONEOS_LVDRIVERS_TARGET} pthread)
+endif()
+
+install(TARGETS phoneos-launcher RUNTIME DESTINATION bin)

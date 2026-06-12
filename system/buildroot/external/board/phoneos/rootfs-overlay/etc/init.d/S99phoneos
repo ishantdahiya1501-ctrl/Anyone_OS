@@ -1,0 +1,25 @@
+#!/bin/sh
+
+case "$1" in
+    start)
+        export LV_LINUX_FBDEV_DEVICE=/dev/fb0
+        export LV_LINUX_EVDEV_POINTER_DEVICE=/dev/input/event0
+        export TSLIB_TSDEVICE=/dev/input/event0
+        export HOME=/root
+        chvt 1
+        setsid /usr/bin/phoneos-launcher </dev/tty1 >/dev/tty1 2>&1 &
+        ;;
+    stop)
+        killall phoneos-launcher 2>/dev/null || true
+        ;;
+    restart)
+        "$0" stop
+        "$0" start
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+esac
+
+exit 0

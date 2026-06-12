@@ -1,0 +1,5 @@
+disable_overscan=1
+dtoverlay=vc4-kms-v3d
+max_framebuffers=2
+gpu_mem=64
+hdmi_force_hotplug=1
