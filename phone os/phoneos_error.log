@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "C:\Users\DELL\desktop\phone os\screens\home_screen.py", line 720, in _handle_tile
+    self._show_app(name)
+    ~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\DELL\desktop\phone os\screens\home_screen.py", line 731, in _show_app
+    app_widget = app_class(theme=theme, parent=self)
+  File "C:\Users\DELL\desktop\phone os\apps\app_store_app.py", line 208, in __init__
+    card = StoreAppCard(app, theme)
+  File "C:\Users\DELL\desktop\phone os\apps\app_store_app.py", line 108, in __init__
+    desc.setStyleSheet(f"color: {self.theme.muted}; background: transparent;")
+                                 ^^^^^^^^^^
+AttributeError: 'StoreAppCard' object has no attribute 'theme'
